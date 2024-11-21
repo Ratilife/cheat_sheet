@@ -2,6 +2,8 @@ import PySimpleGUI as sg
 
 def start_SettingMenu():
     sg.theme('LightBrown11')
+    # Получаем ранее сохраненный путь к папке (если он существует)
+    saved_folder_path = sg.user_settings_get_entry('-saved_folder_path-', '')
     layout = [
                 [sg.Text('Введите путь к папке:', size=(24, 1), auto_size_text=False, justification='right'),
                 sg.InputText(key='-FOLDER-',enable_events=True), sg.FolderBrowse(button_text='...',key='-SAVE-')],
@@ -15,5 +17,6 @@ def start_SettingMenu():
             break
         if event == '-SAVE-':
             folder_path = values['-FOLDER-']
+            sg.user_settings_set_entry('-saved_folder_path-', folder_path)
 
     window.close()
