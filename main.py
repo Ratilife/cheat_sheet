@@ -1,9 +1,7 @@
-from launcher_bar import start_launcher
-from CreateFolder import startCreateFolder
-from Setting_menu import start_SettingMenu
+from View.launcher_bar import start_launcher
 def main():
-    #start_launcher()
-    #startCreateFolder()
-    start_SettingMenu()
+    start_launcher()
+    #startCreateFolder(False)
+    #start_SettingMenu()
 if __name__ == '__main__':
     main()

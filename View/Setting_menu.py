@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from View.CreateFolder import startCreateFolder
 
 def start_SettingMenu():
     sg.theme('LightBrown11')
@@ -15,8 +16,10 @@ def start_SettingMenu():
         event, values = window.read()
         if event == sg.WINDOW_CLOSED:
             break
-        if event == '-SAVE-':
+        if event == '-FOLDER-':
             folder_path = values['-FOLDER-']
             sg.user_settings_set_entry('-saved_folder_path-', folder_path)
+        if event =='-CREATE-':
+            startCreateFolder(False)
 
     window.close()
