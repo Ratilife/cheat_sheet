@@ -6,7 +6,7 @@ def startCreateFolder():
     sg.theme('LightBrown11')
     layout = [
               [sg.Text('Введите название кнопки:',size=(24, 1),), sg.Input(key='-BUTTON_NAME-')],
-              [sg.Text('Куда сохранить файл картинок', size=(24, 1), auto_size_text=False, justification='right'),
+              [sg.Text('Введите путь к папке:', size=(24, 1), auto_size_text=False, justification='right'),
                 sg.InputText(), sg.FolderBrowse(button_text='...')],
                 [sg.Button('Добавить', key='-ADD-')]
              ]
