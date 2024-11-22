@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
 from View.CreateFolder import startCreateFolder
 
-settings_image_path = ''
+
+settings_image_path = r'F:/Языки/Python/Partfolio/cheat_sheet/Image/settings.png'
 
 # Определяем пути к приложениям
 launcher_buttons = {
@@ -20,11 +21,22 @@ def setting(window: sg.Window):
 
 # Функция создания главного окна лаунчера.
 def __make_window():
+
     # Создаем макет с кнопками для запуска приложений
     #layout = [[sg.Button(app, size=(20, 2)) for app in launcher_buttons.keys()]]
-    layout = [[sg.Button(app, size=(20, 2), image_filename=launcher_buttons[app]['imageSetting']
-                if isinstance(launcher_buttons[app], dict) and 'image' in launcher_buttons[app] else None)
-                for app in launcher_buttons.keys()]]
+    layout = [
+        [
+            sg.Button(
+                app if app not in launcher_buttons or not isinstance(launcher_buttons[app], dict) else '',
+                # Если это "Настройка", отображаем картинку
+                image_filename=launcher_buttons[app]['imageSetting']
+                if isinstance(launcher_buttons[app], dict) and 'imageSetting' in launcher_buttons[app] else None,
+                size=(None, None),  # Убираем фиксированный размер
+                tooltip=app,        # Подсказка при наведении
+                key=app             # Назначаем ключ для события
+            ) for app in launcher_buttons.keys()
+        ]
+        ]
     # Создаем окно с указанным макетом
     window = sg.Window("Simple Launcher", layout)
     # Основной цикл обработки событий
