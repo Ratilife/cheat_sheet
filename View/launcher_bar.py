@@ -110,8 +110,8 @@ def start_launcher_bar():
              if isinstance(action, str):
                 if action == 'start_SettingMenu':               # Если действие связано с меню настроек
                     start_SettingMenu()                         # Вызов метода для открытия меню настроек
-                elif action == 'startCreateFolder':               # Если действие связано с созданием папки
-                    startCreateFolder(False)                    # Вызов метода для создания папки
+                elif action == 'startCreateFolder':             # Если действие связано с созданием папки
+                    startCreateFolder(False,launcher_buttons)   # Вызов метода для создания папки
         # Проверяем, если action - это функция
         elif callable(action):
                     action()                                    # Выполнить функцию
