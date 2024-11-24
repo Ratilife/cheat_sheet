@@ -2,9 +2,7 @@ import PySimpleGUI as sg
 from ViewModel.launcher_bar_ViewModel import launcher_bar_ViewModel
 from ViewModel.СreateFolderViewModel import СreateFolderViewModel
 class СreateFolder:
-
-
-    def startсreateFolder(self,determine,launcher_buttons = None):
+    def startCreateFolder(self,determine,launcher_buttons = None):
         # determine - определяет текст на форме True - закладки, False - кнопки
         bookmark = 'Введите название закладки'
         button_text = 'Введите название кнопки'
@@ -19,9 +17,8 @@ class СreateFolder:
         sg.theme('LightBrown11')
         layout = [
                     [sg.Text(text_field, size=(24, 1), ), sg.Input(key='-BUTTON_NAME-')],
-                    [sg.Text('Введите путь к папке:', size=(24, 1), auto_size_text=False, justification='right',
-                             key='-PATH_FOLDER-'),
-                            sg.InputText(), sg.FolderBrowse(button_text='...')],
+                    [sg.Text('Введите путь к файлу:', size=(24, 1), justification='right'),
+                            sg.InputText(key='-FILE_PATH-'), sg.FileBrowse(button_text='...')],
                     [sg.Button('Добавить', key='-ADD-')]
                  ]
         window = sg.Window('Создать', layout)
@@ -34,12 +31,12 @@ class СreateFolder:
                 cfVM = СreateFolderViewModel()
                 if determine:
                     #исполнение в другом модуле
-                    cfVM.create_button(values['-BUTTON_NAME-'],values['-PATH_FOLDER-'])
+                    cfVM.create_bookmark(values['-BUTTON_NAME-'],values['-FILE_PATH-'])
                 else:
                     # исполнение в другом модуле
-                    cfVM.create_button(values['-BUTTON_NAME-'],values['-PATH_FOLDER-'],launcher_buttons)
-
+                    lb = cfVM.create_button(launcher_buttons,values['-BUTTON_NAME-'],values['-FILE_PATH-'])
+                    break  # Закрыть окно после добавления
         window.close()
-
+        return lb
 
 
