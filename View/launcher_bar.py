@@ -1,6 +1,9 @@
 import PySimpleGUI as sg
 from View.CreateFolder import СreateFolder
 from View.Setting_menu import SettingMenu
+from View.DeleteFolder import DeleteFolder
+from ViewModel.launcher_bar_ViewModel import launcher_bar_ViewModel
+
 
 sg.theme('LightBrown11')
 #Этот код представляет собой изображение, закодированное в формате Base64
@@ -160,13 +163,18 @@ def start_launcher_bar():
                         # Если данные существуют, загружаем их
                         launcher_buttons = saved_launcher_buttons
 
-                    new_launcher_buttons=cf.startCreateFolder(False,launcher_buttons)
+                    cf.startCreateFolder(False)
                     # Сохраняем изменения
-                    sg.user_settings_set_entry('launcher_buttons', new_launcher_buttons)
+                    sg.user_settings_set_entry('launcher_buttons', launcher_buttons)
+                    lbVM = launcher_bar_ViewModel()
+                    lbVM.refresh_launcher()
+                    window.close()  # Закрываем текущее окно
+                    return start_launcher_bar()  # Перезапуск окна
                 elif action.endswith(('.py', '.pyw')):  # Если файл Python.
                     sg.execute_py_file(action)
                 elif action == 'startDeleteFolder':
-                    pass
+                    df = DeleteFolder()
+                    df.startDeleteFolder()
                 # Проверяем, если action - это функция
                 else:
                     sg.execute_command_subprocess(action)   # Запускаем приложение.
