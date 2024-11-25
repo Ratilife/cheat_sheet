@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from ViewModel.launcher_bar_ViewModel import launcher_bar_ViewModel
 
 class DeleteFolder:
-    def startDeleteFolder(self,key):
+    def startDeleteFolder(self):
         sg.theme('LightBrown11')
         layout = [
                     [sg.Text('Введите имя кнопки:', size=(24, 1), ), sg.Input(key='-KEY_NAME-')],
@@ -15,8 +15,8 @@ class DeleteFolder:
                 break
             if event == '-DEL-':
                 lbVM = launcher_bar_ViewModel()
-                lb = lbVM.create_button(values['-KEY_NAME-'])
+                lbVM.delete_button(values['-KEY_NAME-'])
                 break  # Закрыть окно после добавления
         window.close()
-        return lb
+
 
