@@ -12,7 +12,8 @@ class SettingMenu:
         layout = [
         [sg.Text('Введите путь к папке:', size=(24, 1), auto_size_text=False, justification='right'),
          sg.InputText(key='-FOLDER-', enable_events=True), sg.FolderBrowse(button_text='...', key='-SAVE-')],
-        [sg.Button('Создать закладку', key='-CREATE-')]
+        [sg.Button('Создать закладку', key='-CREATE-')],
+        [sg.Button('Удалить все кнопки', key='-DEL-')]
         ]
         window = sg.Window('Настройка шпаргалки', layout)
         folder_path = None  # Переменная для хранения пути к папке
@@ -24,6 +25,8 @@ class SettingMenu:
                 folder_path = values['-FOLDER-']
                 sg.user_settings_set_entry('-saved_folder_path-', folder_path)
             if event == '-CREATE-':
-                startCreateFolder(False)
-
+                cf = СreateFolder()
+                cf.startCreateFolder(False)
+            if event == 'DEL':
+                pass
         window.close()
