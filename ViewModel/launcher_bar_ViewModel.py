@@ -19,11 +19,13 @@ class launcher_bar_ViewModel:
         items.insert(insert_index, (key, value))
         # Преобразуем список обратно в словарь
         View.launcher_bar.launcher_buttons = dict(items)
+        return key, value
 
 
     def delete_button(self,key):
-        View.launcher_bar.launcher_buttons = launcher_buttons.pop(key, None)
-        self.__refresh_launcher()
+        launcher_buttons = View.launcher_bar.launcher_buttons.pop(key, None)
+        View.launcher_bar.launcher_buttons = launcher_buttons
+
 
     def delete_all_button(self):
         View.launcher_bar.deleteLauncherButton = True
