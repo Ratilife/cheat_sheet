@@ -21,6 +21,13 @@ launcher_buttons = {
                     'Exit': None
                    }
 deleteLauncherButton = False
+
+def __save_parameters(window):
+    if sg.user_settings_get_entry('-auto save location-', True):  # Сохраняем позицию окна при выходе.
+        print('saving locatoin', window.current_location())
+        sg.user_settings_set_entry('-window location-', window.current_location())
+        sg.user_settings_set_entry('launcher_buttons', launcher_buttons)
+
 def __checking_parameter(parameter):
     return sg.user_settings_get_entry(parameter)
 
@@ -143,9 +150,7 @@ def start_launcher_bar():
 
         if event in (sg.WIN_CLOSE_ATTEMPTED_EVENT, 'Exit', sg.WIN_CLOSED):  # Если нажали выход.
             if event != sg.WIN_CLOSED:
-                if sg.user_settings_get_entry('-auto save location-', True):  # Сохраняем позицию окна при выходе.
-                    print('saving locatoin', window.current_location())
-                    sg.user_settings_set_entry('-window location-', window.current_location())
+                __save_parameters(window)
             break
         if event in launcher_buttons:
              action = launcher_buttons[event]
@@ -164,17 +169,21 @@ def start_launcher_bar():
                         launcher_buttons = saved_launcher_buttons
 
                     cf.startCreateFolder(False)
-                    # Сохраняем изменения
-                    sg.user_settings_set_entry('launcher_buttons', launcher_buttons)
+                    __save_parameters(window)
+                    window.close()
                     lbVM = launcher_bar_ViewModel()
-                    lbVM.refresh_launcher()
-                    window.close()  # Закрываем текущее окно
-                    return start_launcher_bar()  # Перезапуск окна
+                    key, value = lbVM.refresh_launcher()
+                    # Создаём новую кнопку
+                    new_button = sg.Button(button_name, key=button_name, metadata=file_path)
+                    # Обновляем макет окна
+                    window.extend_layout(window['-BUTTON COL-'], [[new_button]])
                 elif action.endswith(('.py', '.pyw')):  # Если файл Python.
                     sg.execute_py_file(action)
                 elif action == 'startDeleteFolder':
                     df = DeleteFolder()
                     df.startDeleteFolder()
+                    window.close()
+                    return start_launcher_bar()
                 # Проверяем, если action - это функция
                 else:
                     sg.execute_command_subprocess(action)   # Запускаем приложение.
