@@ -13,7 +13,7 @@ class SettingMenu:
         layout = [
         [sg.Text('Введите путь к папке:', size=(24, 1), auto_size_text=False, justification='right'),
          sg.InputText(key='-FOLDER-', enable_events=True), sg.FolderBrowse(button_text='...', key='-SAVE-')],
-        [sg.Button('Создать закладку', key='-CREATE-'),sg.Button('Удалить все кнопки', key='-DEL-',disabled=True)]
+        [sg.Button('Создать закладку', key='-CREATE-'),sg.Button('Удалить все кнопки', key='-DEL-')]
         ]
         window = sg.Window('Настройка шпаргалки', layout)
         folder_path = None  # Переменная для хранения пути к папке
