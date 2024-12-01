@@ -151,6 +151,7 @@ def start_launcher_bar():
     global launcher_buttons  # Указываем, что это глобальная переменная
 
     window = __make_window()  # Создаём главное окно.
+    lbVM = launcher_bar_ViewModel()
     while True:
         event, values = window.read()
 
@@ -168,6 +169,8 @@ def start_launcher_bar():
                     sm = SettingMenu()
                     sm.start_SettingMenu()                      # Вызов метода для открытия меню настроек
                     window.close()
+
+                    lbVM.refresh_launcher()
                 elif action == 'startCreateFolder':             # Если действие связано с созданием папки
                     # Вызов метода для создания кнопки и Обновляем словарь
                     cf = СreateFolder()
@@ -179,11 +182,11 @@ def start_launcher_bar():
                         launcher_buttons = saved_launcher_buttons
 
                     cf.startCreateFolder(False)
-
+                    sg.user_settings_set_entry('launcher_buttons', launcher_buttons)
                     window.close()
-                    lbVM = launcher_bar_ViewModel()
+                    #lbVM = launcher_bar_ViewModel()
                     lbVM.refresh_launcher()
-                    #sg.user_settings_set_entry('launcher_buttons', launcher_buttons)
+
 
                     # Создаём новую кнопку
                     #new_button = sg.Button(button_name, key=button_name, metadata=file_path)
@@ -196,7 +199,7 @@ def start_launcher_bar():
                     df = DeleteFolder()
                     df.startDeleteFolder()
                     window.close()
-                    lbVM = launcher_bar_ViewModel()
+                    #lbVM = launcher_bar_ViewModel()
                     lbVM.refresh_launcher()
 
                 # Проверяем, если action - это функция

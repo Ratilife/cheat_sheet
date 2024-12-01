@@ -22,11 +22,11 @@ class SettingMenu:
             if event == sg.WINDOW_CLOSED:
                 break
             if event == '-FOLDER-':
-                folder_path = values['-FOLDER-']
+                folder_path = values['-FOLDER-']+'/cheat_sheet'
                 sg.user_settings_set_entry('-saved_folder_path-', folder_path)
             if event == '-CREATE-':
                 cf = СreateFolder()
-                cf.startCreateFolder(False)
+                cf.startCreateFolder(True)
             if event == '-DEL-':
                 lbVM = launcher_bar_ViewModel()
                 lbVM.delete_all_button()
