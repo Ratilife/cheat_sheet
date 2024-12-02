@@ -39,11 +39,9 @@ def __delete_parameter(parameter):
 def __make_window():
     global launcher_buttons  # Указываем, что это глобальная переменная
 
-
     if deleteLauncherButton:
         __delete_parameter('launcher_buttons')
-    # Проверяем, есть ли сохранённые данные в параметре launcher_buttons
-    #checking_launcher_buttons(launcher_buttons)
+
     # Проверяем, есть ли сохранённые данные
     saved_launcher_buttons = __checking_parameter('launcher_buttons')
 
