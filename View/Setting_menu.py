@@ -48,8 +48,13 @@ class SettingMenu:
                 self.__clear_parameter('-saved_folder_path-')
                 window['-FOLDER-'].update('')
             if event == '-CREATE-':
+                saved_folder_path = self.__checking_parameter('-saved_folder_path-')
+                if saved_folder_path is not None:
+                    folder_path = saved_folder_path
+                else:
+                    folder_path = values['-FOLDER-']
                 cf = СreateFolder()
-                cf.startCreateFolder(True)
+                cf.startCreateFolder(True,folder_path)
             if event == '-DEL-':
                 lbVM = launcher_bar_ViewModel()
                 lbVM.delete_all_button()
