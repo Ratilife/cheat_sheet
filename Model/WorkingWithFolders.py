@@ -20,13 +20,16 @@ class WorkingWithFolders:
 
 
     # Пример использования (функционал возможно перенести в другой модуль)
-    #TODO - создается две папки с одним именем, нужно проверить
     def check_and_create_folder(self,folder_path):
         full_path = os.path.join(folder_path, 'cheat_sheet')
 
+        if not self.check_folder_exists(folder_path):
+            self.create_folder(folder_path)
+        else:
+            print(f"Папка '{folder_path}' уже существует.")
+
+
+    def check_and_create_bookmark(self,folder_path,nameBookmark):
+        full_path = os.path.join(folder_path, nameBookmark)
         if not self.check_folder_exists(full_path):
             self.create_folder(full_path)
-        else:
-            print(f"Папка '{full_path}' уже существует.")
-
-
