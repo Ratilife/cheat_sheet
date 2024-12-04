@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from View.CreateFolder import СreateFolder
 from ViewModel.launcher_bar_ViewModel import launcher_bar_ViewModel
 from Model.WorkingWithFolders import WorkingWithFolders
-
+from Model.Constants import Constants
 
 class SettingMenu:
 
@@ -40,6 +40,7 @@ class SettingMenu:
                 window['-FOLDER-'].update(folder_path)
             if event == '-CREATE_CS-':
                 #Сохраняем параметр
+                # TODO - пересмотреть функционал метода
                 sg.user_settings_set_entry('-saved_folder_path-', folder_path)
                 wwf = WorkingWithFolders()
                 wwf.check_and_create_folder(folder_path)
@@ -48,12 +49,15 @@ class SettingMenu:
                 self.__clear_parameter('-saved_folder_path-')
                 window['-FOLDER-'].update('')
             if event == '-CREATE-':
+                # TODO - пересмотреть функционал метода
                 saved_folder_path = self.__checking_parameter('-saved_folder_path-')
                 if saved_folder_path is not None:
                     folder_path = saved_folder_path
                 else:
                     folder_path = values['-FOLDER-']
+                    Constants.set_value('DATA_PATH',values['-FOLDER-'])
                 cf = СreateFolder()
+                #TODO - пересмотреть функционал метода
                 cf.startCreateFolder(True,folder_path)
             if event == '-DEL-':
                 lbVM = launcher_bar_ViewModel()
