@@ -21,7 +21,7 @@ class WorkingWithFolders:
 
     # Пример использования (функционал возможно перенести в другой модуль)
     def check_and_create_folder(self,folder_path):
-        full_path = os.path.join(folder_path, 'cheat_sheet')
+        #full_path = os.path.join(folder_path, 'cheat_sheet')
 
         if not self.check_folder_exists(folder_path):
             self.create_folder(folder_path)
