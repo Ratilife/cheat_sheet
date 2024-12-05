@@ -1,8 +1,9 @@
 import PySimpleGUI as sg
 from ViewModel.launcher_bar_ViewModel import launcher_bar_ViewModel
 from ViewModel.СreateFolderViewModel import СreateFolderViewModel
+from Model.Constants import Constants
 class СreateFolder:
-    def startCreateFolder(self,determine,folder_path = None):
+    def startCreateFolder(self,determine):
         # determine - определяет текст на форме True - закладки, False - кнопки
         bookmark = 'Введите название закладки'
         button_text = 'Введите название кнопки'
@@ -43,7 +44,7 @@ class СreateFolder:
                 cfVM = СreateFolderViewModel()
                 if determine:
                     #исполнение в другом модуле
-                    cfVM.create_bookmark(values['-BUTTON_NAME-'],folder_path)
+                    cfVM.create_bookmark(values['-BUTTON_NAME-'],Constants.DATA_PATH)
                 else:
                     # исполнение в другом модуле
                     cfVM.create_button(values['-BUTTON_NAME-'],values['-FILE_PATH-'])
