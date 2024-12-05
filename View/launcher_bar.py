@@ -23,7 +23,7 @@ launcher_buttons = {
     "settings_icon": 'start_SettingMenu',
     'Exit': None
 }
-
+#TODO - при загрузке проверять константу TOP_WINDOW
 deleteLauncherButton = False
 
 def __checking_parameter(parameter):
