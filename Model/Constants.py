@@ -2,6 +2,7 @@
 
 class Constants:
     DATA_PATH = None
+    TOP_WINDOW = None
     @staticmethod
     def set_value( key, value):
         """
@@ -15,7 +16,7 @@ class Constants:
             print(f"Атрибут '{key}' не существует.")
 
     @staticmethod
-    def delete_value( key):
+    def delete_value(key):
         """
         Удаляет значение для указанного атрибута класса (устанавливает None).
         :param key: Имя атрибута
@@ -25,6 +26,7 @@ class Constants:
         else:
             print(f"Атрибут '{key}' не существует.")
 
+    #Нужен этот метод?
     @staticmethod
     def get_value(key):
         """
